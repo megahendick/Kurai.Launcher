@@ -4,9 +4,32 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Kurai.Launcher.Pages"
+      xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
       mc:Ignorable="d"
-      Title="SettingsPage" Height="450" Width="800">
-	<Grid>
-		
+      Loaded="SettingsPage_OnLoaded"
+      Title="SettingsPage" Height="343" Width="750">
+	<Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="0,0,15,0" Name="StackPanelTest">
+            <RadioButton Checked="ToggleButton_OnChecked" Name="RadioButton1" Content="General" Cursor="Hand" Height="40" Margin="0,0,0,0" Template="{StaticResource SettingsPageRadioButtonTemplate}"/>
+            <RadioButton Checked="ToggleButton_OnChecked" Content="Discord RPC" Cursor="Hand" Height="40" Margin="0,0,0,0" Template="{StaticResource SettingsPageRadioButtonTemplate}"/>
+            <RadioButton Checked="ToggleButton_OnChecked" Content="Background" Cursor="Hand" Height="40" Margin="0,0,0,0" Template="{StaticResource SettingsPageRadioButtonTemplate}"/>
+            <RadioButton Checked="ToggleButton_OnChecked" Content="Language" Cursor="Hand" Height="40" Margin="0,0,0,0" Template="{StaticResource SettingsPageRadioButtonTemplate}"/>
+	    </StackPanel>
+        
+        <Grid Grid.Column="1">
+            <Grid.Clip>
+                <RectangleGeometry Rect="0,0,480,313" RadiusX="15" RadiusY="15"/>
+            </Grid.Clip>
+            <StackPanel Name="PagesStackPanel" Margin="0,0,0,0">
+                <Frame Source="/Pages/SettingsPages/GeneralSettingsPage.xaml"/>
+                <Frame Source="/Pages/SettingsPages/DiscordRPCSettingsPage.xaml"/>
+                <Frame Source="/Pages/SettingsPages/BackgroundSettingsPage.xaml"/>
+                <Frame Source="/Pages/SettingsPages/LanguageSettingsPage.xaml"/>
+            </StackPanel>
+        </Grid>
 	</Grid>
 </Page>

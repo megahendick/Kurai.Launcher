@@ -5,8 +5,69 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Kurai.Launcher.Pages"
       mc:Ignorable="d"
-      Title="AccountPage" Height="450" Width="800">
-	<Grid>
-		
+      Title="AccountPage" Height="343" Width="750">
+	<Grid Margin="15">
+		<Border VerticalAlignment="Top" HorizontalAlignment="Left" CornerRadius="10" Height="75" Width="75">
+			<Border.Background>
+				<ImageBrush ImageSource="https://upload.wikimedia.org/wikipedia/en/0/03/Walter_White_S5B.png" Stretch="UniformToFill"/>
+			</Border.Background>
+		</Border>
+		<StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,0,0,0">
+			<TextBlock FontFamily="Inter" FontWeight="SemiBold" Text="Walter White" FontSize="24" Foreground="White"/>
+			<TextBlock FontFamily="Inter" FontWeight="SemiBold" Text="Beta Access" FontSize="16" Opacity="0.75" Foreground="White"/>
+		</StackPanel>
+		<Button VerticalAlignment="Top" HorizontalAlignment="Right" Content="Logout" Cursor="Hand">
+			<Button.Template>
+				<ControlTemplate TargetType="Button">
+                    <Grid RenderTransformOrigin="0.5,0.5">
+                        <Grid.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" x:Name="ScaleTransform"/>
+                        </Grid.RenderTransform>
+                        <Border Name="Border" CornerRadius="7.5">
+                            <Border.Background>
+                                <SolidColorBrush Color="White" x:Name="SolidColorBrush1" Opacity="0.1"/>
+                            </Border.Background>
+                        </Border>
+                        <TextBlock Name="TextBlock" Margin="15,7.5,15,7.5" FontFamily="Inter" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" FontWeight="SemiBold" Text="{TemplateBinding Button.Content}" FontSize="18"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0.2" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush1" Storyboard.TargetProperty="Opacity"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0.1" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush1" Storyboard.TargetProperty="Opacity"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0.95" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                        <DoubleAnimation To="0.95" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                        <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+			</Button.Template>
+		</Button>
 	</Grid>
 </Page>

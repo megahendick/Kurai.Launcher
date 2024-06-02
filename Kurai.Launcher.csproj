@@ -6,6 +6,41 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
+        <ApplicationIcon>Assets\kurai-icon.ico</ApplicationIcon>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentWPF" Version="0.10.2" />
+      <PackageReference Include="MathConverter" Version="2.2.1" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Layer 02.png" />
+      <None Remove="BackgroundEffect.ps" />
+      <Resource Include="Assets\Background.png" />
+      <Resource Include="Assets\BackgroundEffect.ps" />
+      <None Remove="Assets\kurai_logo.png" />
+      <Resource Include="Assets\kurai_logo.png" />
+      <None Remove="Assets\kurai-icon.ico" />
+      <Resource Include="Assets\kurai-icon.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ClCompile Include="Assets\BackgroundEffect.fx" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Styles\Scrollbar.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Styles\NewsItem.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
 
 </Project>

@@ -3,10 +3,165 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
       xmlns:local="clr-namespace:Kurai.Launcher.Pages"
       mc:Ignorable="d"
-      Title="PartnersPage" Height="450" Width="800">
-	<Grid>
-		
+      Title="PartnersPage" Height="343" Width="750">
+	<Grid Margin="15">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="Auto"/>
+		</Grid.ColumnDefinitions>
+		<Grid>
+			<Border CornerRadius="10" Name="BackgroundImage">
+				<Border.Background>
+					<ImageBrush ImageSource="https://wallpapers-clan.com/wp-content/uploads/2023/11/cool-minecraft-pixel-desktop-wallpaper-preview.jpg" Stretch="UniformToFill"/>
+				</Border.Background>
+			</Border>
+			<Border Margin="75,25,75,25" CornerRadius="7.5" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{fw:AcrylicBrush TargetName=BackgroundImage, NoiseOpacity=0, TintColor=White, TintOpacity=0.05}">
+				<StackPanel Margin="10">
+                    <TextBlock FontFamily="Inter" HorizontalAlignment="Center" FontWeight="SemiBold" Text="Minecraft server idk" FontSize="22" Foreground="White"/>
+                    <TextBlock FontFamily="Inter" HorizontalAlignment="Left" FontWeight="Medium" Text="You can put a description for the server here and you can add buttons below that can link to websites or add servers or realms to minecraft" Opacity="0.5" FontSize="14" Foreground="White" TextWrapping="Wrap"/>
+					<WrapPanel HorizontalAlignment="Center">
+                        <WrapPanel.Resources>
+							<ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
+                                <Grid RenderTransformOrigin="0.5,0.5">
+                                    <Grid.RenderTransform>
+                                        <ScaleTransform ScaleX="1" ScaleY="1" x:Name="ScaleTransform"/>
+                                    </Grid.RenderTransform>
+                                    <Border Name="Border" CornerRadius="7.5">
+                                        <Border.Background>
+                                            <SolidColorBrush Color="White" x:Name="SolidColorBrush1" Opacity="0.1"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <TextBlock Name="TextBlock" Margin="15,5,15,5" FontFamily="Inter" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" FontWeight="SemiBold" Text="{TemplateBinding Button.Content}" FontSize="18"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="Button.IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="0.2" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush1" Storyboard.TargetProperty="Opacity"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="0.1" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush1" Storyboard.TargetProperty="Opacity"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                    <Trigger Property="Button.IsPressed" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="0.95" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                                    <DoubleAnimation To="0.95" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                                    <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+						</WrapPanel.Resources>
+                        
+                        <Button Content="Add Server" Cursor="Hand" Margin="2.5,5,2.5,0" Template="{StaticResource ButtonTemplate}"/>
+                        <Button Content="Discord" Cursor="Hand" Margin="2.5,5,2.5,0" Template="{StaticResource ButtonTemplate}"/>
+                        <Button Content="Website" Cursor="Hand" Margin="2.5,5,2.5,0" Template="{StaticResource ButtonTemplate}"/>
+					</WrapPanel>
+				</StackPanel>
+			</Border>
+		</Grid>
+        <ScrollViewer Grid.Column="1">
+            <StackPanel Margin="10,0,0,0">
+                <StackPanel.Resources>
+					<ControlTemplate x:Key="RadioButtonTemplate" TargetType="RadioButton">
+                        <Border Name="Border" CornerRadius="7.5" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1" x:Name="ScaleTransform"/>
+                            </Border.RenderTransform>
+                            <Border.Background>
+                                <SolidColorBrush Color="White" x:Name="SolidColorBrush1" Opacity="0.0"/>
+                            </Border.Background>
+                            <Grid Margin="7.5">
+                                <Border Width="135" Height="76" CornerRadius="5" Margin="0,0,0,20">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="https://wallpapers-clan.com/wp-content/uploads/2023/11/cool-minecraft-pixel-desktop-wallpaper-preview.jpg" Stretch="UniformToFill"/>
+                                    </Border.Background>
+                                </Border>
+                                <TextBlock Name="TextBlock" Margin="0,0,0,0" FontFamily="Inter" VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center" FontWeight="SemiBold" Text="{TemplateBinding RadioButton.Content}" FontSize="12"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="RadioButton.IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0.75" Duration="0:0:0.1" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="RadioButton.IsChecked" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0.1" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush1" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0.0" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush1" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="RadioButton.IsPressed" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0.95" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                            <DoubleAnimation To="0.95" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                            <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+				</StackPanel.Resources>
+                <RadioButton Content="Minecraft Server 1" IsChecked="True" Cursor="Hand" Template="{StaticResource RadioButtonTemplate}"/>
+                <RadioButton Content="Minecraft Server 2" Cursor="Hand" Template="{StaticResource RadioButtonTemplate}"/>
+                <RadioButton Content="Minecraft Server 3" Cursor="Hand" Template="{StaticResource RadioButtonTemplate}"/>
+                <RadioButton Content="Minecraft Server 4" Cursor="Hand" Template="{StaticResource RadioButtonTemplate}"/>
+                <RadioButton Content="Minecraft Server 5" Cursor="Hand" Template="{StaticResource RadioButtonTemplate}"/>
+            </StackPanel>
+        </ScrollViewer>
 	</Grid>
 </Page>

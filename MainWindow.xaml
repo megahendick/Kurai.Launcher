@@ -4,9 +4,395 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kurai.Launcher"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Loaded="MainWindow_OnLoaded"
+        Icon="/Assets/kurai-icon.ico"
+        Title="Kurai Launcher" Height="500" Width="800" 
+        ResizeMode="NoResize" AllowsTransparency="True" 
+        WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Grid>
-
+        <Grid Name="BackgroundImage">
+            <Grid Background="Red" Name="Grid1">
+                <Grid.Effect>
+                    <local:BackgroundEffect Resolution="800,500" x:Name="TestEffect"/>
+                </Grid.Effect>
+            </Grid>
+            <Image Source="/Assets/Background.png" Visibility="Visible" VerticalAlignment="Bottom"/>
+        </Grid>
+        
+        <StackPanel Orientation="Horizontal" Margin="25" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Image Source="/Assets/kurai_logo.png" VerticalAlignment="Center" Margin="0,10,10,10"/>
+            <TextBlock FontFamily="Inter" VerticalAlignment="Center" FontWeight="Bold" Text="Kurai Client" FontSize="32" Foreground="White"/>
+        </StackPanel>
+        
+        <Grid Background="Transparent" MouseLeftButtonDown="Grid_MouseLeftButtonDown"/>
+        
+        <Border CornerRadius="15" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="25" Height="50" Padding="10">
+            <Border.Background>
+                <fw:AcrylicBrush TargetName="BackgroundImage" NoiseOpacity="0" TintColor="White" TintOpacity="0.05"/>
+            </Border.Background>
+            <Border.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.75" ShadowDepth="0"/>
+            </Border.Effect>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Height="30">
+                <Button Click="Minimize" Cursor="Hand" Height="30" Width="25" Margin="0,0,10,0">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Grid Background="Transparent" RenderTransformOrigin="0.5,0.5">
+                                <Grid.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1" x:Name="ScaleTransform"/>
+                                </Grid.RenderTransform>
+                                <Rectangle Fill="White" RadiusX="1.5" RadiusY="1.5" Width="25" Height="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                </Rectangle>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="Button.IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0.5" Duration="0:0:0.1" Storyboard.TargetProperty="Opacity"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetProperty="Opacity"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                                <Trigger Property="Button.IsPressed" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0.9" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                                <DoubleAnimation To="0.9" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                                <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Click="Close" Cursor="Hand" Height="30" Width="30">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Grid Background="Transparent" RenderTransformOrigin="0.5,0.5">
+                                <Grid.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1" x:Name="ScaleTransform"/>
+                                </Grid.RenderTransform>
+                                <Rectangle Fill="White" RadiusX="1.5" RadiusY="1.5" Width="3" Height="30" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Rectangle.RenderTransform>
+                                        <RotateTransform Angle="45"/>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                                <Rectangle Fill="White" RadiusX="1.5" RadiusY="1.5" Width="3" Height="30" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Rectangle.RenderTransform>
+                                        <RotateTransform Angle="-45"/>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="Button.IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0.5" Duration="0:0:0.1" Storyboard.TargetProperty="Opacity"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetProperty="Opacity"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                                <Trigger Property="Button.IsPressed" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0.9" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                                <DoubleAnimation To="0.9" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                                <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </Border>
+        
+        <Button Name="LaunchButton" RenderTransformOrigin="0.5,0.5" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Margin="25,175,25,25">
+            <Button.RenderTransform>
+                <ScaleTransform ScaleX="1.15" ScaleY="1.15"/>
+            </Button.RenderTransform>
+            <Button.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="15" RenderTransformOrigin="0.5,0.5">
+                        <Border.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" x:Name="ScaleTransform"/>
+                        </Border.RenderTransform>
+                        <Border.Background>
+                            <fw:AcrylicBrush TargetName="BackgroundImage" NoiseOpacity="0" TintColor="White" TintOpacity="0.05" x:Name="AcrylicBrush"/>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.75" ShadowDepth="0"/>
+                        </Border.Effect>
+                        <Border Padding="30,10,30,10" CornerRadius="15">
+                            <Border.Background>
+                                <SolidColorBrush Color="White" Opacity="0" x:Name="SolidColorBrush"/>
+                            </Border.Background>
+                            <TextBlock FontFamily="Inter" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Text="Launch" FontSize="24" Foreground="White"/>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0.05" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush" Storyboard.TargetProperty="Opacity"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0.00" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush" Storyboard.TargetProperty="Opacity"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0.90" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                        <DoubleAnimation To="0.90" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1.00" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                        <DoubleAnimation To="1.00" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        
+        <Border MouseEnter="UIElement_OnMouseEnter" MouseLeave="UIElement_OnMouseLeave" Height="385" Width="750" Margin="25,25,25,-235" VerticalAlignment="Bottom" HorizontalAlignment="Center" CornerRadius="15" Background="{fw:AcrylicBrush TargetName=BackgroundImage, NoiseOpacity=0, TintColor=White, TintOpacity=0.05}">
+            <Border.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.75" ShadowDepth="0"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Background="Transparent" Grid.RowSpan="3" Margin="0,25,0,-25"/>
+                
+                <StackPanel Name="PageRbStackPanel" Orientation="Horizontal" Margin="5">
+                    <RadioButton Checked="ToggleButton_OnChecked" Content="News" Name="RadioButton1" Cursor="Hand" Template="{StaticResource PageRadioButtonTemplate}"/>
+                    <RadioButton Checked="ToggleButton_OnChecked" Content="Partners" Cursor="Hand" Template="{StaticResource PageRadioButtonTemplate}"/>
+                    <RadioButton Checked="ToggleButton_OnChecked" Content="Scripts" Cursor="Hand" Template="{StaticResource PageRadioButtonTemplate}"/>
+                    <RadioButton Checked="ToggleButton_OnChecked" Content="Account" Cursor="Hand" Template="{StaticResource PageRadioButtonTemplate}"/>
+                    <RadioButton Checked="ToggleButton_OnChecked" Content="Settings" Cursor="Hand" Template="{StaticResource PageRadioButtonTemplate}"/>
+                    <RadioButton Checked="ToggleButton_OnChecked" Content="About" Cursor="Hand" Template="{StaticResource PageRadioButtonTemplate}"/>
+                </StackPanel>
+                
+                <ToggleButton Name="PinToggleButton" Visibility="Hidden" Cursor="Hand" Height="30" Width="30" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <ToggleButton.Template>
+                        <ControlTemplate>
+                            <Grid RenderTransformOrigin="0.5,0.5">
+                                <Grid.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1" x:Name="ScaleTransform"/>
+                                </Grid.RenderTransform>
+                                <Border Opacity="0" Name="Border" CornerRadius="7.5" Background="{fw:AcrylicBrush TargetName=BackgroundImage, NoiseOpacity=0, TintColor=White, TintOpacity=0.1}">
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.75" ShadowDepth="0"/>
+                                    </Border.Effect>
+                                </Border>
+                                <Viewbox Name="Viewbox" Margin="2.5">
+                                    <Path Data="M30.5,30.5c-0.148,0.148-0.344,0.224-0.54,0.224c-0.176,0-0.353-0.061-0.497-0.184l-11.084-9.505  l2.659-2.659l9.501,11.087C30.799,29.766,30.782,30.218,30.5,30.5z M24.293,12.293l-0.879-0.879  c-0.391-0.391-0.902-0.586-1.414-0.586s-1.024,0.195-1.414,0.586L20.45,11.55l-8.807-7.206c0.717-0.785,0.702-1.999-0.057-2.758  l-0.879-0.879c-0.391-0.391-1.024-0.391-1.414,0L0.707,9.293c-0.391,0.391-0.391,1.024,0,1.414l0.879,0.879  c0.389,0.389,0.897,0.582,1.406,0.582c0.485,0,0.97-0.176,1.352-0.525l7.206,8.807l-0.136,0.136c-0.781,0.781-0.781,2.047,0,2.828  l0.879,0.879c0.391,0.391,1.024,0.391,1.414,0l10.586-10.586C24.683,13.317,24.683,12.683,24.293,12.293z" Fill="White"/>
+                                </Viewbox>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="ToggleButton.IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0.5" Duration="0:0:0.1" Storyboard.TargetName="Viewbox" Storyboard.TargetProperty="Opacity"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="Viewbox" Storyboard.TargetProperty="Opacity"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                                <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="Border" Storyboard.TargetProperty="Opacity"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0" Duration="0:0:0.1" Storyboard.TargetName="Border" Storyboard.TargetProperty="Opacity"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                                <Trigger Property="ToggleButton.IsPressed" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="0.90" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                                <DoubleAnimation To="0.90" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                                <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </ToggleButton.Template>
+                </ToggleButton>
+                
+                <Grid Grid.Row="1" Background="White" Opacity="0.25"/>
+                
+                <Grid Grid.Row="2">
+                    <Grid.Clip>
+                        <RectangleGeometry Rect="0,0,750,343"/>
+                    </Grid.Clip>
+                    <StackPanel Orientation="Horizontal" Name="PagesStackPanel" Margin="0,0,0,0">
+                        <Frame Source="/Pages/NewsPage.xaml"/>
+                        <Frame Source="/Pages/PartnersPage.xaml"/>
+                        <Frame Source="/Pages/ScriptsPage.xaml"/>
+                        <Frame Source="/Pages/AccountPage.xaml"/>
+                        <Frame Source="/Pages/SettingsPage.xaml"/>
+                        <Frame Source="/Pages/AboutPage.xaml"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+        <Grid Name="PinToggleButton2" Background="Transparent" Height="40" Width="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,25,110">
+            <ToggleButton IsChecked="{Binding ElementName=PinToggleButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Width="30">
+                <ToggleButton.Template>
+                    <ControlTemplate>
+                        <Grid RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1" x:Name="ScaleTransform"/>
+                            </Grid.RenderTransform>
+                            <Border Opacity="0" Name="Border" CornerRadius="7.5" Background="{fw:AcrylicBrush TargetName=BackgroundImage, NoiseOpacity=0, TintColor=White, TintOpacity=0.1}">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" Opacity="0.75" ShadowDepth="0"/>
+                                </Border.Effect>
+                            </Border>
+                            <Viewbox Name="Viewbox" Margin="2.5">
+                                <Path Data="M30.5,30.5c-0.148,0.148-0.344,0.224-0.54,0.224c-0.176,0-0.353-0.061-0.497-0.184l-11.084-9.505  l2.659-2.659l9.501,11.087C30.799,29.766,30.782,30.218,30.5,30.5z M24.293,12.293l-0.879-0.879  c-0.391-0.391-0.902-0.586-1.414-0.586s-1.024,0.195-1.414,0.586L20.45,11.55l-8.807-7.206c0.717-0.785,0.702-1.999-0.057-2.758  l-0.879-0.879c-0.391-0.391-1.024-0.391-1.414,0L0.707,9.293c-0.391,0.391-0.391,1.024,0,1.414l0.879,0.879  c0.389,0.389,0.897,0.582,1.406,0.582c0.485,0,0.97-0.176,1.352-0.525l7.206,8.807l-0.136,0.136c-0.781,0.781-0.781,2.047,0,2.828  l0.879,0.879c0.391,0.391,1.024,0.391,1.414,0l10.586-10.586C24.683,13.317,24.683,12.683,24.293,12.293z" Fill="White"/>
+                            </Viewbox>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ToggleButton.IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0.5" Duration="0:0:0.1" Storyboard.TargetName="Viewbox" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="Viewbox" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="Border" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0" Duration="0:0:0.1" Storyboard.TargetName="Border" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsPressed" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="0.90" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                            <DoubleAnimation To="0.90" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                            <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </ToggleButton.Template>
+            </ToggleButton>
+        </Grid>
     </Grid>
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,800,500" RadiusX="20" RadiusY="20"/>
+    </Window.Clip>
 </Window>

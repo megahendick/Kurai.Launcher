@@ -3,10 +3,12 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:Kurai.Launcher.Pages"
+      xmlns:local="clr-namespace:Kurai.Launcher"
+      xmlns:utils="clr-namespace:Kurai.Launcher.Utils"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d"
-      Title="NewsPage" Height="450" Width="800">
-	<Grid>
-		
-	</Grid>
+      Title="NewsPage" Height="343" Width="750">
+	<ScrollViewer Margin="15,15,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+		<WrapPanel Name="NewsPanel" VerticalAlignment="Stretch"/>
+	</ScrollViewer>
 </Page>

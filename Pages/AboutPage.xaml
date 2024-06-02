@@ -5,8 +5,19 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Kurai.Launcher.Pages"
       mc:Ignorable="d"
-      Title="AboutPage" Height="450" Width="800">
-	<Grid>
-		
-	</Grid>
+      Title="AboutPage" Height="343" Width="750">
+	<StackPanel Margin="15">
+		<TextBlock FontFamily="Inter" HorizontalAlignment="Center" FontWeight="SemiBold" Text="Launcher Info" FontSize="24" Foreground="White"/>
+		<Border Height="3" CornerRadius="1.5" Background="White" Opacity="0.5"/>
+		<TextBlock FontFamily="Inter" FontWeight="Medium" Opacity="0.75" Text="Launcher Version: beta 0.3" FontSize="16" Foreground="White"/>
+		<TextBlock FontFamily="Inter" FontWeight="Medium" Opacity="0.75" Text="Minecraft Version: 1.20.81" FontSize="16" Foreground="White"/>
+		<TextBlock FontFamily="Inter" HorizontalAlignment="Center" Margin="0,10,0,0" FontWeight="SemiBold" Text="Developers" FontSize="24" Foreground="White"/>
+		<Border Height="3" CornerRadius="1.5" Background="White" Opacity="0.5"/>
+		<TextBlock FontFamily="Inter" FontWeight="Medium" Opacity="0.75" Text="ASM" FontSize="16" Foreground="White"/>
+		<TextBlock FontFamily="Inter" FontWeight="Medium" Opacity="0.75" Text="Ice Bear" FontSize="16" Foreground="White"/>
+		<TextBlock FontFamily="Inter" FontWeight="Medium" Opacity="0.75" Text="chyves" FontSize="16" Foreground="White"/>
+		<TextBlock FontFamily="Inter" FontWeight="Medium" Opacity="0.75" Text="oanshul" FontSize="16" Foreground="White"/>
+		<TextBlock FontFamily="Inter" FontWeight="Medium" Opacity="0.75" Text="happenedagain" FontSize="16" Foreground="White"/>
+		<TextBlock FontFamily="Inter" FontWeight="Medium" Opacity="0.75" Text="probably other people too but idk" FontSize="16" Foreground="White"/>
+	</StackPanel>
 </Page>
