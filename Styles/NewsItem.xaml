@@ -1,0 +1,103 @@
+﻿<RadioButton x:Class="Kurai.Launcher.NewsItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Kurai.Launcher"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             mc:Ignorable="d"
+             IsChecked="False"
+             Loaded="NewsItem_OnLoaded"
+             Click="NewsItem_OnClick"
+             Unchecked="NewsItem_OnUnchecked"
+             Width="350" Height="80"
+             Cursor="Hand" Margin="0,0,10,10">
+	<RadioButton.Template>
+		<ControlTemplate TargetType="local:NewsItem">
+			<Border CornerRadius="10" RenderTransformOrigin="0.5,0.5">
+				<Border.RenderTransform>
+					<ScaleTransform ScaleX="1" ScaleY="1" x:Name="ScaleTransform"/>
+				</Border.RenderTransform>
+				<Grid Margin="7.5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+					<Border Name="Border" CornerRadius="6" Width="0" Margin="0,0,7.5,0">
+						<Border.Background>
+							<ImageBrush x:Name="ImageBrush" ImageSource="https://upload.wikimedia.org/wikipedia/en/7/77/EricCartman.png" Stretch="UniformToFill"/>
+						</Border.Background>
+					</Border>
+					<StackPanel Grid.Column="1">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="Auto"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock Name="TitleTextBlock" Text="{Binding Title}" FontFamily="Inter" FontSize="16" FontWeight="SemiBold" Foreground="White" TextWrapping="Wrap"/>
+							<TextBlock Grid.Column="1" Name="AuthorTextBlock" Text="{Binding Author}" VerticalAlignment="Center" FontFamily="Inter" FontSize="0.001" Visibility="Collapsed" FontWeight="Medium" Foreground="White" Opacity="0.5" Margin="0,0,10,0"/>
+							<TextBlock Grid.Column="2" Name="DateTextBlock" Text="{Binding Date}" VerticalAlignment="Center" FontFamily="Inter" FontSize="0.001" Visibility="Collapsed" FontWeight="Medium" Foreground="White" Opacity="0.5"/>
+						</Grid>
+						<TextBlock Name="BodyTextBlock" Text="{Binding Body}" FontFamily="Inter" FontSize="12" FontWeight="Normal" Opacity="0.75" Foreground="White" TextWrapping="Wrap"/>
+					</StackPanel>
+				</Grid>
+				<Border.Background>
+					<SolidColorBrush Color="White" Opacity="0.05" x:Name="SolidColorBrush"/>
+				</Border.Background>
+			</Border>
+			<ControlTemplate.Triggers>
+				<Trigger Property="ShowImage" Value="True">
+					<Trigger.EnterActions>
+						<BeginStoryboard>
+							<Storyboard>
+								<DoubleAnimation To="65" Duration="0:0:0.05" Storyboard.TargetName="Border" Storyboard.TargetProperty="Width"/>
+							</Storyboard>
+						</BeginStoryboard>
+					</Trigger.EnterActions>
+					<Trigger.ExitActions>
+						<BeginStoryboard>
+							<Storyboard>
+								<DoubleAnimation To="0" Duration="0:0:0.05" Storyboard.TargetName="Border" Storyboard.TargetProperty="Width"/>
+							</Storyboard>
+						</BeginStoryboard>
+					</Trigger.ExitActions>
+				</Trigger>
+				<Trigger Property="ToggleButton.IsMouseOver" Value="True">
+					<Trigger.EnterActions>
+						<BeginStoryboard>
+							<Storyboard>
+								<DoubleAnimation To="0.1" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush" Storyboard.TargetProperty="Opacity"/>
+							</Storyboard>
+						</BeginStoryboard>
+					</Trigger.EnterActions>
+					<Trigger.ExitActions>
+						<BeginStoryboard>
+							<Storyboard>
+								<DoubleAnimation To="0.05" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush" Storyboard.TargetProperty="Opacity"/>
+							</Storyboard>
+						</BeginStoryboard>
+					</Trigger.ExitActions>
+				</Trigger>
+				<Trigger Property="ToggleButton.IsPressed" Value="True">
+					<Trigger.EnterActions>
+						<BeginStoryboard>
+							<Storyboard>
+								<DoubleAnimation To="0.95" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+								<DoubleAnimation To="0.95" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+							</Storyboard>
+						</BeginStoryboard>
+					</Trigger.EnterActions>
+					<Trigger.ExitActions>
+						<BeginStoryboard>
+							<Storyboard>
+								<DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+								<DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+							</Storyboard>
+						</BeginStoryboard>
+					</Trigger.ExitActions>
+				</Trigger>
+			</ControlTemplate.Triggers>
+		</ControlTemplate>
+	</RadioButton.Template>
+</RadioButton>
