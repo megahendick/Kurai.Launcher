@@ -6,7 +6,21 @@
       xmlns:local="clr-namespace:Kurai.Launcher.Pages.SettingsPages"
       mc:Ignorable="d"
       Title="GeneralSettingsPage" Height="313" Width="480">
-	<Grid Background="Red">
-		
-	</Grid>
+	<StackPanel>
+		<Grid Margin="0,0,0,4">
+			<TextBlock Margin="0,0,0,5" HorizontalAlignment="Left" FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" Text="Custom DLL" FontSize="18" Foreground="White"/>
+			<ToggleButton x:Name="CustomDllToggleButton"/>
+		</Grid>
+		<Expander IsExpanded="{Binding ElementName=CustomDllToggleButton, Path=IsChecked}">
+			<TextBox HorizontalAlignment="Stretch" Height="25" TextAlignment="Left" Text="temp" Margin="0,0,0,5" Template="{StaticResource TextBoxTemplate}"/>
+		</Expander>
+		<Grid Margin="0,0,0,5">
+			<TextBlock HorizontalAlignment="Left" FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" Text="Use Beta DLL" FontSize="18" Foreground="White"/>
+			<ToggleButton x:Name="BetaDllToggleButton"/>
+		</Grid>
+		<Grid Margin="0,0,0,5">
+			<TextBlock HorizontalAlignment="Left" FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" Text="Close To Tray" FontSize="18" Foreground="White"/>
+			<ToggleButton x:Name="CloseToTrayToggleButton"/>
+		</Grid>
+	</StackPanel>
 </Page>

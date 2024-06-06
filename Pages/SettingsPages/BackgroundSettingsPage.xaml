@@ -6,7 +6,14 @@
       xmlns:local="clr-namespace:Kurai.Launcher.Pages.SettingsPages"
       mc:Ignorable="d"
       Title="BackgroundSettingsPage" Height="313" Width="480">
-	<Grid Background="Blue">
-		
-	</Grid>
+	<StackPanel>
+		<Grid Margin="0,0,0,5">
+			<TextBlock HorizontalAlignment="Left" FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" Text="Background Speed" FontSize="18" Foreground="White"/>
+			<TextBox TextChanged="TextBoxBase_OnTextChanged" TextAlignment="Right" HorizontalAlignment="Right" Text="0.75" Template="{StaticResource TextBoxTemplate}"/>
+		</Grid>
+		<Grid Margin="0,0,0,5">
+			<TextBlock HorizontalAlignment="Left" FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" Text="Background FPS" FontSize="18" Foreground="White"/>
+			<TextBox TextChanged="TextBoxBase_OnTextChanged2" TextAlignment="Right" HorizontalAlignment="Right" Text="24" Template="{StaticResource TextBoxTemplate}"/>
+		</Grid>
+	</StackPanel>
 </Page>

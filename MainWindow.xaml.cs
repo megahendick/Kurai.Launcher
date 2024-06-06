@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
@@ -13,13 +14,23 @@ namespace Kurai.Launcher;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public static double BackgroundSpeed = .75;
+    public static string CurrentVersion = "1.20.81";
+    
+    public static double BackgroundSpeed { get; set; }
     public static double BackgroundFps
     {
         get => 1000 / aTimer.Interval;
-        set => aTimer.Interval = 1000 / value;
+        set
+        {
+            if (value == 0)
+            {
+                aTimer.Interval = 0.000001;
+                return;
+            }
+            aTimer.Interval = 1000 / value;
+        }
     }
-    
+
     private static System.Timers.Timer aTimer = new();
     Stopwatch Stopwatch = new();
 
@@ -30,10 +41,13 @@ public partial class MainWindow : Window
         dele = new WinEventDelegate(WinEventProc);
         IntPtr m_hhook = SetWinEventHook(EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, dele, 0, 0, WINEVENT_OUTOFCONTEXT);
 
+        BackgroundSpeed = 0.75;
         BackgroundFps = 24;
         aTimer.Elapsed += DispatcherTimer_Tick;
         aTimer.Start();
         Stopwatch.Start();
+        
+        Dispatcher.InvokeAsync((Action)(() => Utils.DiscordRpc.Initialize()));
     }
 
     WinEventDelegate dele = null;
@@ -59,11 +73,7 @@ public partial class MainWindow : Window
         StringBuilder Buff = new StringBuilder(nChars);
         handle = GetForegroundWindow();
 
-        if (GetWindowText(handle, Buff, nChars) > 0)
-        {
-            return Buff.ToString();
-        }
-        return null;
+        return GetWindowText(handle, Buff, nChars) > 0 ? Buff.ToString() : null;
     }
 
     public void WinEventProc(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
@@ -82,10 +92,18 @@ public partial class MainWindow : Window
 
     private void DispatcherTimer_Tick(object? sender, EventArgs e)
     {
-        Dispatcher.Invoke(() =>
+        try
         {
-            TestEffect.Time = Stopwatch.Elapsed.TotalSeconds * BackgroundSpeed;
-        });
+			Dispatcher.Invoke(() =>
+			{
+				TestEffect.Time +=  aTimer.Interval / 1000 * BackgroundSpeed;
+				//TestEffect.Time =  Stopwatch.Elapsed.TotalSeconds * BackgroundSpeed;
+			});
+		}
+        catch
+        {
+            // ignored
+        }
     }
 
     private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -208,5 +226,10 @@ public partial class MainWindow : Window
         Storyboard.SetTargetProperty(animation, new PropertyPath(MarginProperty));
         storyboard.Children.Add(animation);
         storyboard.Begin(PagesStackPanel);
+    }
+
+    private void MainWindow_OnClosing(object? sender, CancelEventArgs e)
+    {
+        Utils.DiscordRpc.client.Dispose();
     }
 }

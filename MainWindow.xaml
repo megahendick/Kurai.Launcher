@@ -7,6 +7,7 @@
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         mc:Ignorable="d"
         Loaded="MainWindow_OnLoaded"
+        Closing="MainWindow_OnClosing"
         Icon="/Assets/kurai-icon.ico"
         Title="Kurai Launcher" Height="500" Width="800" 
         ResizeMode="NoResize" AllowsTransparency="True" 

@@ -6,7 +6,26 @@
       xmlns:local="clr-namespace:Kurai.Launcher.Pages.SettingsPages"
       mc:Ignorable="d"
       Title="DiscordRPCSettingsPage" Height="313" Width="480">
-	<Grid Background="Yellow">
-		
-	</Grid>
+	<StackPanel>
+		<Grid Margin="0,0,0,4">
+			<TextBlock Margin="0,0,0,5" HorizontalAlignment="Left" FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" Text="Enabled" FontSize="18" Foreground="White"/>
+			<ToggleButton x:Name="EnabledToggleButton"/>
+		</Grid>
+		<Expander IsExpanded="{Binding ElementName=EnabledToggleButton, Path=IsChecked}">
+			<StackPanel>
+				<Grid Margin="0,0,0,5">
+					<TextBlock Margin="0,0,0,5" HorizontalAlignment="Left" FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" Text="Show Image" FontSize="18" Foreground="White"/>
+					<ToggleButton x:Name="ImageToggleButton"/>
+				</Grid>
+				<Grid Margin="0,0,0,5">
+					<TextBlock Margin="0,0,0,5" HorizontalAlignment="Left" FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" Text="Show Status" FontSize="18" Foreground="White"/>
+					<ToggleButton x:Name="StatusToggleButton"/>
+				</Grid>
+				<Grid Margin="0,0,0,5">
+					<TextBlock Margin="0,0,0,5" HorizontalAlignment="Left" FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" Text="Show Time" FontSize="18" Foreground="White"/>
+					<ToggleButton x:Name="TimeToggleButton"/>
+				</Grid>
+			</StackPanel>
+		</Expander>
+	</StackPanel>
 </Page>

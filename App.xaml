@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Kurai.Launcher"
              xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+             xmlns:mdxaml="https://github.com/whistyun/MdXaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -11,9 +12,40 @@
                 <!--  FluentWPF Controls  -->
                 <ResourceDictionary Source="pack://application:,,,/FluentWPF;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="/Styles/Scrollbar.xaml"/>
+                <ResourceDictionary Source="/Styles/Expander.xaml"/>
+                <ResourceDictionary Source="/Styles/ToggleButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <math:MathConverter x:Key="Math" />
+            
+            <ControlTemplate x:Key="TextBoxTemplate" TargetType="TextBox">
+				<Border MinWidth="50" CornerRadius="7.5" >
+					<Border.Background>
+						<SolidColorBrush Color="White" Opacity="0.1" x:Name="SolidColorBrush"/>
+					</Border.Background>
+					<Grid>
+						<TextBox FontFamily="Inter" Name="TextBox" Padding="10" Margin="5,0,5,0" TextAlignment="{TemplateBinding TextAlignment}" VerticalAlignment="Center" Text="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" FontSize="14" Foreground="White" Background="Transparent" CaretBrush="White" BorderThickness="0"/>
+					</Grid>
+				</Border>
+				<ControlTemplate.Triggers>
+					<Trigger Property="TextBox.IsMouseOver" Value="True">
+						<Trigger.EnterActions>
+							<BeginStoryboard>
+								<Storyboard>
+									<DoubleAnimation To="0.2" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush" Storyboard.TargetProperty="Opacity"/>
+								</Storyboard>
+							</BeginStoryboard>
+						</Trigger.EnterActions>
+						<Trigger.ExitActions>
+							<BeginStoryboard>
+								<Storyboard>
+									<DoubleAnimation To="0.1" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush" Storyboard.TargetProperty="Opacity"/>
+								</Storyboard>
+							</BeginStoryboard>
+						</Trigger.ExitActions>
+					</Trigger>
+				</ControlTemplate.Triggers>
+			</ControlTemplate>
             
             <ControlTemplate x:Key="PageRadioButtonTemplate">
                 <Grid RenderTransformOrigin="0.5,0.5">

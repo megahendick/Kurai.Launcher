@@ -22,7 +22,7 @@
         
         <Grid Grid.Column="1">
             <Grid.Clip>
-                <RectangleGeometry Rect="0,0,480,313" RadiusX="15" RadiusY="15"/>
+                <RectangleGeometry Rect="0,0,480,313"/>
             </Grid.Clip>
             <StackPanel Name="PagesStackPanel" Margin="0,0,0,0">
                 <Frame Source="/Pages/SettingsPages/GeneralSettingsPage.xaml"/>

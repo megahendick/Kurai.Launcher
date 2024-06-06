@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Kurai.Launcher.Pages.SettingsPages"
       mc:Ignorable="d"
       Title="LanguageSettingsPage" Height="313" Width="480">
-	<Grid Background="Purple">
-		
+	<Grid>
+		<TextBlock Margin="0,0,0,0" HorizontalAlignment="Center" FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" Text="Coming soon!" FontSize="18" Foreground="White"/>
 	</Grid>
 </Page>

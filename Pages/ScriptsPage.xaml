@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Kurai.Launcher.Pages"
       xmlns:utils="clr-namespace:Kurai.Launcher.Utils"
       mc:Ignorable="d"
+      Loaded="ScriptsPage_OnLoaded"
       Title="ScriptsPage" Height="343" Width="750">
 	<Grid Margin="15">
 		<Grid.RowDefinitions>
@@ -17,15 +18,64 @@
 			<ColumnDefinition Width="2*"/>
 		</Grid.ColumnDefinitions>
 		
-		<Border CornerRadius="15" Padding="10,5,10,5" Margin="0,0,0,0">
-			<Border.Background>
-				<SolidColorBrush Color="White" Opacity="0.1"/>
-			</Border.Background>
-			<TextBlock FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" Text="Search" FontSize="14" Foreground="White"/>
-		</Border>
 		
-		<ScrollViewer Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" PreviewMouseWheel="UIElement_OnPreviewMouseWheel">
-			<StackPanel Orientation="Horizontal">
+		
+		<TextBox TextChanged="TbOnClick" Name="SearchBox" Margin="0,0,0,0">
+			<TextBox.Template>
+				<ControlTemplate>
+					<Border CornerRadius="15" Padding="10,5,10,5" >
+						<Border.Background>
+							<SolidColorBrush Color="White" Opacity="0.1" x:Name="SolidColorBrush"/>
+						</Border.Background>
+						<Grid>
+							<TextBlock Text="Search" Opacity="0.5" Name="TextBlock" FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" FontSize="14" Foreground="White"/>
+							<TextBox FontFamily="Inter" Margin="-2.5,0,0,0" Name="TextBox" VerticalAlignment="Center" Text="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Medium" FontSize="14" Foreground="White" Background="Transparent" CaretBrush="White" BorderThickness="0"/>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="TextBox.IsMouseOver" Value="True">
+							<Trigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation To="0.2" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.EnterActions>
+							<Trigger.ExitActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation To="0.1" Duration="0:0:0.1" Storyboard.TargetName="SolidColorBrush" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.ExitActions>
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="TextBox.IsKeyboardFocusWithin" Value="False"/>
+								<Condition SourceName="TextBox" Property="TextBox.Text" Value=""/>
+							</MultiTrigger.Conditions>
+							<MultiTrigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation To="0.5" Duration="0:0:0.1" Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</BeginStoryboard>
+							</MultiTrigger.EnterActions>
+							<MultiTrigger.ExitActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation To="0.0" Duration="0:0:0.1" Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Opacity"/>
+									</Storyboard>
+								</BeginStoryboard>
+							</MultiTrigger.ExitActions>
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</TextBox.Template>
+		</TextBox>
+		
+		<ScrollViewer Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" PreviewMouseWheel="UIElement_OnPreviewMouseWheel">
+			<StackPanel Orientation="Horizontal" Name="TagsStackPanel">
 				<StackPanel.Resources>
 					<Style TargetType="ToggleButton">
 						<Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -34,14 +84,14 @@
 						<Setter Property="Template">
 							<Setter.Value>
 								<ControlTemplate>
-									<Border CornerRadius="15" Padding="10,5,10,5" RenderTransformOrigin="0.5,0.5">
+									<Border CornerRadius="12"  Height="24" Padding="10,5,10,5" RenderTransformOrigin="0.5,0.5">
 										<Border.RenderTransform>
 											<ScaleTransform ScaleX="1" ScaleY="1" x:Name="ScaleTransform"/>
 										</Border.RenderTransform>
 										<Border.Background>
 											<SolidColorBrush Color="White" Opacity="0.1" x:Name="SolidColorBrush"/>
 										</Border.Background>
-										<TextBlock FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" Text="Test" FontSize="14" Foreground="White"/>
+										<TextBlock FontFamily="Inter" VerticalAlignment="Center" FontWeight="Medium" Text="{TemplateBinding ToggleButton.Content}" FontSize="14" Foreground="White"/>
 									</Border>
 									<ControlTemplate.Triggers>
 										<Trigger Property="ToggleButton.IsMouseOver" Value="True">
@@ -100,48 +150,23 @@
 						</Setter>
 					</Style>
 				</StackPanel.Resources>
-				<ToggleButton />
-				<ToggleButton />
-				<ToggleButton />
-				<ToggleButton />
-				<ToggleButton />
-				<ToggleButton />
-				<ToggleButton />
-				<ToggleButton />
-				<ToggleButton />
-				<ToggleButton />
-				
 			</StackPanel>
 		</ScrollViewer>
 		
 		<ScrollViewer Margin="0,5,0,0" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0">
-			<WrapPanel>
-				<Border Height="400" Width="350" Margin="0,0,5,5">
-					<Border.Background>
-						<SolidColorBrush Color="White" Opacity="0.1"/>
-					</Border.Background>
-				</Border>
-				<Border Height="400" Width="350" Margin="0,0,5,5">
-					<Border.Background>
-						<SolidColorBrush Color="White" Opacity="0.1"/>
-					</Border.Background>
-				</Border>
-				<Border Height="400" Width="350" Margin="0,0,5,5">
-					<Border.Background>
-						<SolidColorBrush Color="White" Opacity="0.1"/>
-					</Border.Background>
-				</Border>
-				<Border Height="400" Width="350" Margin="0,0,5,5">
-					<Border.Background>
-						<SolidColorBrush Color="White" Opacity="0.1"/>
-					</Border.Background>
-				</Border>
-				<Border Height="400" Width="350" Margin="0,0,5,5">
-					<Border.Background>
-						<SolidColorBrush Color="White" Opacity="0.1"/>
-					</Border.Background>
-				</Border>
-			</WrapPanel>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="10"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<StackPanel Name="StackPanel1" VerticalAlignment="Top">
+					
+				</StackPanel>
+				<StackPanel Grid.Column="2" Name="StackPanel2" VerticalAlignment="Top">
+					
+				</StackPanel>
+			</Grid>
 		</ScrollViewer>
 	</Grid>
 </Page>
